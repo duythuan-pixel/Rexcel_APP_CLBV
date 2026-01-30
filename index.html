@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiêu chí Chất lượng cơ bản - Bệnh viện Sức khỏe Tâm thần BR-VT</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Thư viện đọc Excel trên trình duyệt -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Tiêu chí Chất lượng cơ bản<br>Bệnh viện Sức khỏe Tâm thần BR-VT</h1>
+            <p class="subtitle">Nhập liệu, quản lý và thống kê tiêu chuẩn</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('tochuc')">🏥 Tổ chức-Hành chính</button>
+                <button class="tab-btn" onclick="switchTab('ksnk')">🧼 Chống nhiễm khuẩn</button>
+                <button class="tab-btn" onclick="switchTab('duoc')">💊 Dược - XN-CĐHA</button>
+                <button class="tab-btn" onclick="switchTab('kehoach')">📑 Kế hoạch nghiệp vụ</button>
+                <button class="tab-btn" onclick="switchTab('statistics')">📈 Thống kê</button>
+                <button class="tab-btn" onclick="switchTab('data')">📋 Dữ liệu</button>
+            </div>
+
+            <!-- Phòng Tổ chức-Hành chính quản trị Tab -->
+            <div id="tochuc-tab" class="tab-content active">
+                <div class="card">
+                    <h2>🏥 Phòng Tổ chức-Hành chính quản trị</h2>
+                    <p class="section-description">Đánh giá tiêu chuẩn về cơ sở vật chất, quy mô và cơ cấu tổ chức, nhân sự</p>
+                    
+                    <form id="tochuc-form">
+                        <div class="form-group">
+                            <label for="tochuc-date">Ngày đánh giá:</label>
+                            <input type="date" id="tochuc-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tochuc-evaluator">Người đánh giá:</label>
+                            <input type="text" id="tochuc-evaluator" placeholder="Nhập tên người đánh giá" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tochuc-hospital">Tên bệnh viện:</label>
+                            <input type="text" id="tochuc-hospital" placeholder="Nhập tên bệnh viện" required>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">I. Tiêu chuẩn về cơ sở vật chất</h3>
+                            
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">1.</span>
+                                    <span class="eval-text">Bệnh viện phải có địa điểm cố định.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">2.</span>
+                                    <span class="eval-text">Bệnh viện phải có lối đi cho xe cứu thương ra vào khu vực cấp cứu.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.</span>
+                                    <span class="eval-text">Các khoa, phòng, bộ phận chuyên môn:</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.1.</span>
+                                    <span class="eval-text">Được bố trí phù hợp với chức năng của từng bộ phận<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_3_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_3_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.2.</span>
+                                    <span class="eval-text">Bảo đảm kết nối về hạ tầng giao thông giữa các bộ phận chuyên môn thuận tiện cho việc khám bệnh, chữa bệnh, an toàn cho người bệnh, người nhà người bệnh và nhân viên y tế.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_3_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_3_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.</span>
+                                    <span class="eval-text">Có biển hiệu, sơ đồ và biển chỉ dẫn đến các khoa, phòng, bộ phận chuyên môn, hành chính.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">5.</span>
+                                    <span class="eval-text">Có phương tiện vận chuyển cấp cứu trong và ngoài bệnh viện.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">8.</span>
+                                    <span class="eval-text">Có điện, nước phục vụ hoạt động của cơ sở khám bệnh, chữa bệnh.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_8" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_8" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section II: Tiêu chuẩn về quy mô và cơ cấu tổ chức -->
+                        <div class="evaluation-section">
+                            <h3 class="section-title">II. Tiêu chuẩn về quy mô và cơ cấu tổ chức</h3>
+                            
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">1.</span>
+                                    <span class="eval-text">Bệnh viện phải có cơ cấu tổ chức gồm các khoa: khám bệnh, lâm sàng, cận lâm sàng, khoa dược và các bộ phận phụ trợ.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">2.</span>
+                                    <span class="eval-text">Khoa khám bệnh phải có nơi tiếp đón, phòng cấp cứu, phòng lưu, phòng khám, phòng thực hiện kỹ thuật, thủ thuật (nếu thực hiện các kỹ thuật, thủ thuật).<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.</span>
+                                    <span class="eval-text">Khoa lâm sàng:</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.a)</span>
+                                    <span class="eval-text">Đối với bệnh viện đa khoa: có tối thiểu hai trong bốn khoa nội, ngoại, sản, nhi.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3a" value="Có">
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3a" value="Không">
+                                        <span>Không</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3a" value="Không áp dụng">
+                                        <span>Không áp dụng</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.b)</span>
+                                    <span class="eval-text">Đối với bệnh viện chuyên khoa, bệnh viện y học cổ truyền, bệnh viện răng hàm mặt: có tối thiểu một khoa lâm sàng phù hợp với phạm vi hoạt động chuyên môn.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3b" value="Có">
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3b" value="Không">
+                                        <span>Không</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_3b" value="Không áp dụng">
+                                        <span>Không áp dụng</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.</span>
+                                    <span class="eval-text">Khoa cận lâm sàng: có tối thiểu một phòng xét nghiệm và một phòng chẩn đoán hình ảnh. Riêng đối với bệnh viện chuyên khoa mắt nếu không có bộ phận chẩn đoán hình ảnh thì phải có hợp đồng hỗ trợ chuyên môn với cơ sở khám bệnh, chữa bệnh đã được cấp giấy phép hoạt động có bộ phận chẩn đoán hình ảnh.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">5.</span>
+                                    <span class="eval-text">Khoa dược có các bộ phận: nghiệp vụ dược, kho và cấp phát, thống kê dược, thông tin thuốc và dược lâm sàng.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">6.</span>
+                                    <span class="eval-text">Khoa dinh dưỡng; bộ phận dinh dưỡng lâm sàng; người phụ trách công tác dinh dưỡng; người làm công tác dinh dưỡng.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_6" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_6" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">7.</span>
+                                    <span class="eval-text">Khoa kiểm soát nhiễm khuẩn; bộ phận kiểm soát nhiễm khuẩn; người làm công tác kiểm soát nhiễm khuẩn.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_7" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_7" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">8.</span>
+                                    <span class="eval-text">Các bộ phận chuyên môn khác trong bệnh viện phù hợp với phạm vi hoạt động chuyên môn.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_8" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_8" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">9.</span>
+                                    <span class="eval-text">Các phòng, bộ phận để thực hiện các chức năng về kế hoạch tổng hợp, tổ chức nhân sự, quản lý chất lượng, điều dưỡng, tài chính kế toán, công nghệ thông tin, thiết bị y tế và các chức năng cần thiết khác.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_9" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_II_9" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section III: Tiêu chuẩn về nhân sự -->
+                        <div class="evaluation-section">
+                            <h3 class="section-title">III. Tiêu chuẩn về nhân sự</h3>
+                            
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">1.</span>
+                                    <span class="eval-text">Người hành nghề được phân công công việc phù hợp với phạm vi hành nghề được cấp có thẩm quyền phê duyệt.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_III_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_III_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">2.</span>
+                                    <span class="eval-text">Người hành nghề được cập nhật kiến thức y khoa liên tục.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_III_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="standard_III_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tochuc-notes">Ghi chú bổ sung:</label>
+                            <textarea id="tochuc-notes" rows="3" placeholder="Nhập ghi chú bổ sung (nếu có)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">💾 Lưu đánh giá</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearTochucForm()">🗑️ Xóa form</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tổ chống nhiễm khuẩn Tab -->
+            <div id="ksnk-tab" class="tab-content">
+                <div class="card">
+                    <h2>🧼 Tổ chống nhiễm khuẩn</h2>
+                    <p class="section-description">Đánh giá tiêu chuẩn về môi trường</p>
+                    
+                    <form id="ksnk-form">
+                        <div class="form-group">
+                            <label for="ksnk-date">Ngày đánh giá:</label>
+                            <input type="date" id="ksnk-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ksnk-evaluator">Người đánh giá:</label>
+                            <input type="text" id="ksnk-evaluator" placeholder="Nhập tên người đánh giá" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ksnk-hospital">Tên bệnh viện:</label>
+                            <input type="text" id="ksnk-hospital" placeholder="Nhập tên bệnh viện" required>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">I. Tiêu chuẩn về cơ sở vật chất</h3>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">6.</span>
+                                    <span class="eval-text">Tiêu chuẩn về môi trường:</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">6.1.</span>
+                                    <span class="eval-text">Có biện pháp xử lý chất thải sinh hoạt.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_6_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_6_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">6.2.</span>
+                                    <span class="eval-text">Có biện pháp xử lý chất thải y tế.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_6_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_6_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">V. Tiêu chuẩn về chuyên môn</h3>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">5.</span>
+                                    <span class="eval-text">Kiểm soát nhiễm khuẩn bao gồm: tổ chức, phân công nhiệm vụ; xây dựng quy trình.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_V_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ksnk_V_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ksnk-notes">Ghi chú bổ sung:</label>
+                            <textarea id="ksnk-notes" rows="3" placeholder="Nhập ghi chú bổ sung (nếu có)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">💾 Lưu đánh giá</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearKsnkForm()">🗑️ Xóa form</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Khoa dược - XN-CĐHA Tab -->
+            <div id="duoc-tab" class="tab-content">
+                <div class="card">
+                    <h2>💊 Khoa dược - XN-CĐHA</h2>
+                    <p class="section-description">Đánh giá tiêu chuẩn an toàn bức xạ và thiết bị y tế</p>
+                    
+                    <form id="duoc-form">
+                        <div class="form-group">
+                            <label for="duoc-date">Ngày đánh giá:</label>
+                            <input type="date" id="duoc-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duoc-evaluator">Người đánh giá:</label>
+                            <input type="text" id="duoc-evaluator" placeholder="Nhập tên người đánh giá" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duoc-hospital">Tên bệnh viện:</label>
+                            <input type="text" id="duoc-hospital" placeholder="Nhập tên bệnh viện" required>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">7. Tiêu chuẩn về an toàn bức xạ</h3>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">7.1.</span>
+                                    <span class="eval-text">Có Giấy phép tiến hành công việc bức xạ.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">7.2.</span>
+                                    <span class="eval-text">Có văn bản phân công người chịu trách nhiệm về công tác an toàn bức xạ.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">7.3.</span>
+                                    <span class="eval-text">Nhân viên thực hiện công việc bức xạ có Chứng chỉ nhân viên bức xạ.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_3" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_3" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">7.4.</span>
+                                    <span class="eval-text">Có trang bị liều kế cho nhân viên bức xạ.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_7_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">IV. Tiêu chuẩn về thiết bị y tế</h3>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">1.</span>
+                                    <span class="eval-text">Thiết bị y tế để thực hiện kỹ thuật thuộc phạm vi hoạt động chuyên môn đã được cấp có thẩm quyền phê duyệt và có hồ sơ quản lý đối với các thiết bị đó.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">2.</span>
+                                    <span class="eval-text">Quy chế quản lý, sử dụng, kiểm tra, bảo dưỡng, bảo trì, sửa chữa, thay thế vật tư linh kiện, bảo quản thiết bị y tế tại cơ sở khám bệnh, chữa bệnh.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.</span>
+                                    <span class="eval-text">Quy trình về sử dụng, vận hành, sửa chữa, bảo dưỡng đảm bảo chất lượng thiết bị y tế.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_3" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_3" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.</span>
+                                    <span class="eval-text">Thiết bị y tế thuộc danh mục phải kiểm định, hiệu chuẩn được kiểm định, hiệu chuẩn theo quy định.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">5.</span>
+                                    <span class="eval-text">Bộ phận và nhân sự thực hiện nhiệm vụ quản lý việc sử dụng, kiểm tra, bảo dưỡng, bảo trì, sửa chữa, kiểm định, hiệu chuẩn thiết bị y tế.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="duoc_IV_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duoc-notes">Ghi chú bổ sung:</label>
+                            <textarea id="duoc-notes" rows="3" placeholder="Nhập ghi chú bổ sung (nếu có)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">💾 Lưu đánh giá</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearDuocForm()">🗑️ Xóa form</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Kế hoạch nghiệp vụ Tab -->
+            <div id="kehoach-tab" class="tab-content">
+                <div class="card">
+                    <h2>📑 Kế hoạch nghiệp vụ</h2>
+                    <p class="section-description">Đánh giá tiêu chuẩn về chuyên môn</p>
+                    
+                    <form id="kehoach-form">
+                        <div class="form-group">
+                            <label for="kehoach-date">Ngày đánh giá:</label>
+                            <input type="date" id="kehoach-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kehoach-evaluator">Người đánh giá:</label>
+                            <input type="text" id="kehoach-evaluator" placeholder="Nhập tên người đánh giá" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kehoach-hospital">Tên bệnh viện:</label>
+                            <input type="text" id="kehoach-hospital" placeholder="Nhập tên bệnh viện" required>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <h3 class="section-title">V. Tiêu chuẩn về chuyên môn</h3>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">1.</span>
+                                    <span class="eval-text">Điều trị nội trú, tổ chức trực chuyên môn 24/24 giờ của tất cả các ngày.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">2.</span>
+                                    <span class="eval-text">Quy trình khám bệnh, chữa bệnh ngoại trú.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.</span>
+                                    <span class="eval-text">Phổ biến, áp dụng và xây dựng quy trình chuyên môn về khám bệnh, chữa bệnh:</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.1.</span>
+                                    <span class="eval-text">Phổ biến các quy trình kỹ thuật khám bệnh, chữa bệnh do Bộ Y tế hoặc bệnh viện ban hành.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.2.</span>
+                                    <span class="eval-text">Phổ biến các hướng dẫn chẩn đoán và điều trị do Bộ Y tế hoặc bệnh viện ban hành.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.3.</span>
+                                    <span class="eval-text">Áp dụng các quy trình kỹ thuật khám bệnh, chữa bệnh do Bộ Y tế hoặc bệnh viện ban hành.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_3" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_3" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.4.</span>
+                                    <span class="eval-text">Áp dụng các hướng dẫn chẩn đoán và điều trị do Bộ Y tế hoặc bệnh viện ban hành.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">3.5.</span>
+                                    <span class="eval-text">Tập huấn hoặc phổ biến hoặc có chỉ đạo về việc tuân thủ các quy định trong kê đơn thuốc.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_3_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.</span>
+                                    <span class="eval-text">Quản lý chất lượng:</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.1.</span>
+                                    <span class="eval-text">Thành lập hệ thống quản lý chất lượng.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_1" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_1" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.2.</span>
+                                    <span class="eval-text">Quy chế hoạt động của hội đồng quản lý chất lượng bệnh viện.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_2" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_2" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.3.</span>
+                                    <span class="eval-text">Kế hoạch đổi/ cải tiến chất lượng chung của toàn bệnh viện cho năm hiện tại hoặc cho giai đoạn từ một đến ba năm tiếp theo.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_3" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_3" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.4.</span>
+                                    <span class="eval-text">Chỉ số chất lượng bệnh viện và kết quả đo lường.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_4" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_4" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.5.</span>
+                                    <span class="eval-text">Quản lý chất lượng xét nghiệm gồm: kế hoạch quản lý chất lượng xét nghiệm, xây dựng quy trình hướng dẫn, tập huấn cho nhân viên liên quan, đánh giá thực hiện kế hoạch quản lý chất lượng xét nghiệm liên quan.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_5" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_5" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-item sub-item">
+                                <div class="evaluation-label">
+                                    <span class="eval-number">4.6.</span>
+                                    <span class="eval-text">Báo cáo sự cố y khoa.<span class="required-mark">*</span></span>
+                                </div>
+                                <div class="evaluation-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_6" value="Có" required>
+                                        <span>Có</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="kehoach_V_4_6" value="Không" required>
+                                        <span>Không</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kehoach-notes">Ghi chú bổ sung:</label>
+                            <textarea id="kehoach-notes" rows="3" placeholder="Nhập ghi chú bổ sung (nếu có)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">💾 Lưu đánh giá</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearKehoachForm()">🗑️ Xóa form</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Statistics Tab -->
+            <div id="statistics-tab" class="tab-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3>Tổng số phiếu đánh giá</h3>
+                            <p class="stat-value" id="total-records">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <h3>Tổng tiêu chí đã đánh giá</h3>
+                            <p class="stat-value" id="total-value">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <h3>Tỷ lệ “Có”</h3>
+                            <p class="stat-value" id="avg-value">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <h3>Phiếu hôm nay</h3>
+                            <p class="stat-value" id="today-records">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Thống kê theo nhóm tiêu chuẩn (I–V)</h2>
+                    <canvas id="category-chart"></canvas>
+                </div>
+
+                <div class="card">
+                    <h2>Thống kê theo loại phiếu</h2>
+                    <canvas id="timeline-chart"></canvas>
+                </div>
+
+                <div class="card">
+                    <h2>Bảng tổng hợp (I–V)</h2>
+                    <div id="top-values"></div>
+                </div>
+            </div>
+
+            <!-- Data List Tab -->
+            <div id="data-tab" class="tab-content">
+                <div class="card">
+                    <div class="data-header">
+                        <h2>Danh sách dữ liệu</h2>
+                        <div class="data-actions">
+                            <button class="btn btn-primary" onclick="exportData()">📥 Xuất Excel</button>
+                            <button class="btn btn-danger" onclick="confirmDeleteAll()">🗑️ Xóa tất cả</button>
+                        </div>
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="🔍 Tìm bệnh viện / người đánh giá / ghi chú..." onkeyup="filterData()">
+
+                        <select id="filter-mode" onchange="filterData()">
+                            <option value="">Tất cả loại phiếu</option>
+                            <option value="tochuc">Tổ chức-Hành chính</option>
+                            <option value="ksnk">Chống nhiễm khuẩn</option>
+                            <option value="duoc">Dược - XN-CĐHA</option>
+                            <option value="kehoach">Kế hoạch nghiệp vụ</option>
+                        </select>
+
+                        <select id="filter-criterion" onchange="filterData()">
+                            <option value="__all__">Tất cả tiêu chí (I–V)</option>
+                            <optgroup label="I. Tiêu chuẩn về cơ sở vật chất">
+                                <option value="standard_1">(TCHC) I.1 Địa điểm cố định</option>
+                                <option value="standard_2">(TCHC) I.2 Lối đi xe cứu thương</option>
+                                <option value="standard_3_1">(TCHC) I.3.1 Bố trí phù hợp</option>
+                                <option value="standard_3_2">(TCHC) I.3.2 Kết nối hạ tầng</option>
+                                <option value="standard_4">(TCHC) I.4 Biển hiệu, sơ đồ</option>
+                                <option value="standard_5">(TCHC) I.5 Phương tiện vận chuyển</option>
+                                <option value="standard_8">(TCHC) I.8 Điện, nước</option>
+                                <option value="ksnk_6_1">(Chống NK) 6.1 Xử lý chất thải sinh hoạt</option>
+                                <option value="ksnk_6_2">(Chống NK) 6.2 Xử lý chất thải y tế</option>
+                                <option value="duoc_7_1">(Dược-XN-CĐHA) 7.1 Giấy phép bức xạ</option>
+                                <option value="duoc_7_2">(Dược-XN-CĐHA) 7.2 Phân công ATBX</option>
+                                <option value="duoc_7_3">(Dược-XN-CĐHA) 7.3 Chứng chỉ NVBX</option>
+                                <option value="duoc_7_4">(Dược-XN-CĐHA) 7.4 Liều kế</option>
+                            </optgroup>
+                            <optgroup label="II. Tiêu chuẩn về quy mô và cơ cấu tổ chức">
+                                <option value="standard_II_1">II.1 Cơ cấu tổ chức</option>
+                                <option value="standard_II_2">II.2 Khoa khám bệnh</option>
+                                <option value="standard_II_3a">II.3a Khoa lâm sàng (đa khoa)</option>
+                                <option value="standard_II_3b">II.3b Khoa lâm sàng (chuyên khoa)</option>
+                                <option value="standard_II_4">II.4 Khoa cận lâm sàng</option>
+                                <option value="standard_II_5">II.5 Khoa dược</option>
+                                <option value="standard_II_6">II.6 Khoa dinh dưỡng</option>
+                                <option value="standard_II_7">II.7 Khoa kiểm soát nhiễm khuẩn</option>
+                                <option value="standard_II_8">II.8 Bộ phận chuyên môn khác</option>
+                                <option value="standard_II_9">II.9 Phòng/bộ phận hành chính</option>
+                            </optgroup>
+                            <optgroup label="III. Tiêu chuẩn về nhân sự">
+                                <option value="standard_III_1">III.1 Phân công công việc</option>
+                                <option value="standard_III_2">III.2 Cập nhật kiến thức</option>
+                            </optgroup>
+                            <optgroup label="IV. Tiêu chuẩn về thiết bị y tế">
+                                <option value="duoc_IV_1">IV.1 Hồ sơ thiết bị</option>
+                                <option value="duoc_IV_2">IV.2 Quy chế QLSD</option>
+                                <option value="duoc_IV_3">IV.3 Quy trình vận hành</option>
+                                <option value="duoc_IV_4">IV.4 Kiểm định/hiệu chuẩn</option>
+                                <option value="duoc_IV_5">IV.5 Bộ phận & nhân sự</option>
+                            </optgroup>
+                            <optgroup label="V. Tiêu chuẩn về chuyên môn">
+                                <option value="ksnk_V_5">(Chống NK) V.5 Kiểm soát nhiễm khuẩn</option>
+                                <option value="kehoach_V_1">(Kế hoạch) V.1 Trực 24/24</option>
+                                <option value="kehoach_V_2">(Kế hoạch) V.2 QT ngoại trú</option>
+                                <option value="kehoach_V_3_1">(Kế hoạch) V.3.1 PB QTKT</option>
+                                <option value="kehoach_V_3_2">(Kế hoạch) V.3.2 PB HDCĐ-ĐT</option>
+                                <option value="kehoach_V_3_3">(Kế hoạch) V.3.3 AD QTKT</option>
+                                <option value="kehoach_V_3_4">(Kế hoạch) V.3.4 AD HDCĐ-ĐT</option>
+                                <option value="kehoach_V_3_5">(Kế hoạch) V.3.5 Tuân thủ kê đơn</option>
+                                <option value="kehoach_V_4_1">(Kế hoạch) V.4.1 HT QLCL</option>
+                                <option value="kehoach_V_4_2">(Kế hoạch) V.4.2 QC HĐ QLCL</option>
+                                <option value="kehoach_V_4_3">(Kế hoạch) V.4.3 KH cải tiến CL</option>
+                                <option value="kehoach_V_4_4">(Kế hoạch) V.4.4 Chỉ số CL</option>
+                                <option value="kehoach_V_4_5">(Kế hoạch) V.4.5 QLCL XN</option>
+                                <option value="kehoach_V_4_6">(Kế hoạch) V.4.6 BC sự cố y khoa</option>
+                            </optgroup>
+                        </select>
+
+                        <select id="filter-result" onchange="filterData()">
+                            <option value="">Tất cả kết quả</option>
+                            <option value="Có">Có</option>
+                            <option value="Không">Không</option>
+                            <option value="Không áp dụng">Không áp dụng</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên/Mã số</th>
+                                    <th>Danh mục</th>
+                                    <th>Giá trị</th>
+                                    <th>Ngày</th>
+                                    <th>Ghi chú</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-table-body">
+                                <!-- Data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
